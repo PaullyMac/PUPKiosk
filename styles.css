@@ -1,0 +1,314 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('images/bg2.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden; /* Prevent scrollbars */
+    height: 100vh;
+    width: 100vw;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.699); 
+    z-index: -1;
+}
+
+.viewport-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* Add new map section */
+.map-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 0 12px;
+}
+
+/* Add new map container styling for canvas overlay */
+.map-container {
+    position: relative;
+    display: inline-block;
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+#highlight-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through to the image map */
+    z-index: 10;
+}
+
+/* Direct styling for the map image - modified for sequential animation */
+#pup-map-img {
+    max-width: 100%;
+    max-height: calc(100vh - 140px);
+    width: auto;
+    height: auto;
+    display: block;
+    border: 4px solid #7a0c0c;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(122, 12, 12, 0.25);
+    padding: 0;
+    margin: 0 auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    position: relative;
+    opacity: 0; /* Start completely hidden */
+    animation: fadeIn 0.8s ease-out 1.2s forwards; /* Starts after hero animation finishes */
+}
+
+/* Modern Modal Styling - Redesigned */
+.modal {
+    display: none;
+    position: absolute; 
+    width: 320px;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+    transition: left 0.1s, top 0.1s; /* Keep original transition for movement */
+    pointer-events: none; /* Keep this to prevent interference with mouse events */
+    filter: drop-shadow(0 8px 16px rgba(122, 12, 12, 0.18));
+    transform: translateZ(0);
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 0 2px rgba(122, 12, 12, 0.08);
+}
+
+/* Accent element */
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: #7a0c0c;
+    background-image: linear-gradient(to right, #7a0c0c, #9e1010, #7a0c0c);
+}
+
+.modal img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: block;
+    position: relative;
+}
+
+.modal h2 {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 0;
+    padding: 16px 18px 6px 18px;
+    color: #7a0c0c;
+    text-align: left;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+
+.modal p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 5px 18px 18px 18px;
+    text-align: left;
+}
+
+/* Adding banner and hero styles */
+
+/* Compact top banner styling */
+#top-banner {
+    width: 100%;
+    height: 70px; /* Reduced from 132px */
+    position: relative; /* Changed from fixed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    flex-shrink: 0;
+}
+
+#pup-logo {
+    height: 60px; /* Reduced from 110px */
+    width: auto;
+    object-fit: contain;
+}
+
+.banner-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    max-width: calc(100% - 80px);
+    overflow: hidden;
+}
+
+.university-name {
+    font-family: "Times New Roman", Times, serif;
+    color: #7a0c0c;
+    font-size: clamp(14px, 2vw, 28px);
+    margin: 0;
+    line-height: 1.1;
+    font-weight: bold;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.university-tagline {
+    font-family: "Times New Roman", Times, serif;
+    color: #000000;
+    font-size: clamp(10px, 1.5vw, 18px);
+    margin: 0;
+    line-height: 1.1;
+    white-space: normal;
+}
+
+/* Compact hero section styling */
+#hero {
+    text-align: center;
+    padding: 5px 0; /* Reduced from 40px */
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+#hero h1 {
+    margin: 0;
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #7a0c0c;
+    font-family: "Poppins", sans-serif;
+    opacity: 0;
+    animation: fadeInRise 0.8s ease-out 0.2s forwards;
+}
+
+/* Animation keyframes for fade-in rise effect */
+@keyframes fadeInRise {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media queries for different screen sizes */
+@media screen and (max-width: 768px) {
+    #top-banner {
+        height: 60px;
+    }
+    
+    #pup-logo {
+        height: 50px;
+    }
+    
+    #pup-map-img {
+        border-width: 3px;
+        border-radius: 12px;
+        max-height: calc(100vh - 110px);
+    }
+    
+    .map-section {
+        padding: 0 8px;
+    }
+
+    .modal {
+        width: 290px;
+    }
+    
+    .modal-content {
+        border-radius: 14px;
+    }
+    
+    .modal-content::before {
+        height: 5px;
+    }
+    
+    .modal h2 {
+        font-size: 1.3em;
+        padding: 14px 16px 5px 16px;
+    }
+    
+    .modal p {
+        padding: 4px 16px 16px 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .modal {
+        width: 270px;
+    }
+    
+    .modal img {
+        height: 160px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    #top-banner {
+        height: 50px;
+    }
+    
+    #pup-logo {
+        height: 40px;
+    }
+    
+    #hero {
+        padding: 3px 0;
+    }
+    
+    #hero h1 {
+        font-size: clamp(18px, 3vw, 32px);
+    }
+    
+    #pup-map-img {
+        border-width: 2px;
+        border-radius: 8px;
+        max-height: calc(100vh - 85px);
+    }
+    
+    .map-section {
+        padding: 0 6px;
+    }
+}
