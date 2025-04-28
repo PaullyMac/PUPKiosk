@@ -34,15 +34,19 @@ body::before {
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    padding: 0 12px;
+    padding: 5px 12px 35px 12px; /* Added bottom padding to account for footer */
+    overflow: hidden;
 }
 
 /* Add new map container styling for canvas overlay */
 .map-container {
     position: relative;
     display: inline-block;
-    max-width: 95%;
+    max-width: 85%; /* Reduced from 90% */
     margin: 0 auto;
+    max-height: calc(100vh - 210px); /* Increased subtraction from 190px to 210px */
+    overflow: visible;
+    margin-bottom: 15px; /* Added bottom margin */
 }
 
 #highlight-canvas {
@@ -58,7 +62,7 @@ body::before {
 /* Direct styling for the map image - modified for sequential animation */
 #pup-map-img {
     max-width: 100%;
-    max-height: calc(100vh - 140px);
+    max-height: calc(100vh - 210px); /* Match the container's new max-height */
     width: auto;
     height: auto;
     display: block;
@@ -189,10 +193,10 @@ body::before {
     white-space: normal;
 }
 
-/* Compact hero section styling */
+/* Compact hero section styling - adjusted for better spacing */
 #hero {
     text-align: center;
-    padding: 5px 0; /* Reduced from 40px */
+    padding: 15px 0 10px 0; /* Increased top padding to 15px and bottom to 10px */
     position: relative;
     z-index: 1;
     flex-shrink: 0;
@@ -233,6 +237,38 @@ body::before {
     }
 }
 
+/* Footer styling */
+#footer {
+    width: 100%;
+    height: 30px; /* Smaller than header (70px) */
+    background-color: #7a0c0c;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    padding: 0 10px;
+}
+
+/* Footer link styling */
+#footer a {
+  color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+#footer a:hover {
+  text-decoration: underline;
+  color: rgba(255, 255, 255, 1); /* Full white on hover */
+}
+
 /* Media queries for different screen sizes */
 @media screen and (max-width: 768px) {
     #top-banner {
@@ -246,7 +282,7 @@ body::before {
     #pup-map-img {
         border-width: 3px;
         border-radius: 12px;
-        max-height: calc(100vh - 110px);
+        max-height: calc(100vh - 200px);
     }
     
     .map-section {
@@ -273,6 +309,15 @@ body::before {
     .modal p {
         padding: 4px 16px 16px 16px;
     }
+
+    #footer {
+        font-size: 0.75em;
+        height: 25px;
+    }
+    
+    .map-container, #pup-map-img {
+        max-height: calc(100vh - 200px);
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -282,6 +327,11 @@ body::before {
     
     .modal img {
         height: 160px;
+    }
+
+    #footer {
+        font-size: 0.7em;
+        height: 22px;
     }
 }
 
@@ -305,10 +355,14 @@ body::before {
     #pup-map-img {
         border-width: 2px;
         border-radius: 8px;
-        max-height: calc(100vh - 85px);
+        max-height: calc(100vh - 145px);
     }
     
     .map-section {
-        padding: 0 6px;
+        padding: 2px 12px 30px 12px;
+    }
+    
+    .map-container {
+        max-height: calc(100vh - 145px);
     }
 }

@@ -19,7 +19,7 @@ PUPKiosk is an interactive web-based campus map application for the Polytechnic 
 - **PUP-Themed Interface**: Official maroon color scheme with campus background and styling
 
 ## Date Created
-This project was developed between **April 25, 2025** and **April 26, 2025**.
+This project was developed between **April 25, 2025** and **April 28, 2025**.
 
 ## How to Run
 To run this project locally, follow these simple steps:
