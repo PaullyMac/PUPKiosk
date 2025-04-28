@@ -139,3 +139,24 @@
 - Removed duplicate animation declaration for `#pup-map-img` element to fix CSS conflict
 - Streamlined CSS animation properties to ensure proper execution order
 - Ensured consistent animation behavior across all browsers
+
+## [Footer Enhancement] - 2025-04-28
+
+### HTML Features
+- Added responsive footer with PUP maroon color scheme 
+- Included university name and campus information
+- Added developer credit with hyperlink to portfolio
+
+### Style Features
+- Created fixed-position footer with appropriate sizing and spacing
+- Implemented responsive font sizes for different screen widths
+- Added subtle shadow effect for visual separation
+- Created hover effects for footer links
+- Used semi-transparent text for better visual harmony
+
+### Layout Improvements
+- Adjusted spacing between header, map container, and footer
+- Modified map container height calculation to accommodate footer
+- Improved padding and margins for better visual balance
+- Added additional responsive breakpoints for different device heights
+- Optimized whitespace distribution across viewport
